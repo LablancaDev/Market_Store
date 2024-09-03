@@ -52,7 +52,7 @@ const Home_Productos: React.FC = () => {
                             <div className="card h-100 p-3 card-hover text-light">
                                 <img src={product.image} className="card-img-top" alt={product.title} />
                                 <div className="card-body d-flex flex-column">
-                                    <h5 className="card-title">{product.title}</h5>
+                                    <h5 className="card-title truncate">{product.title}</h5>
                                     <p className="card-text fw-bold text-danger">{product.price} €</p>
                                     <button onClick={() => buyProduct(product)} className="btn btn-primary mt-auto">Añadir al Carrito</button>
                                 </div>

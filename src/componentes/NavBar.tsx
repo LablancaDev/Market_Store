@@ -3,7 +3,7 @@ import { User } from '../interfaces/interfazUser';
 
 
 // Definimos una interfaz NavBarProps que describe las propiedades que recibe el componente NavBar
-interface NavBarProps {
+ export interface NavBarProps {
     user: User | null; 
 }
 
@@ -13,6 +13,7 @@ const NavBar: React.FC<NavBarProps> = ({ user }) => {
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 top-0">
                 <div className="container-fluid">
+                    <img src="../src/assets/imgs/icon2.png" alt="" />
                     <a className="navbar-brand" href="#">MarketStore</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

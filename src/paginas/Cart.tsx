@@ -16,10 +16,10 @@ function Cart() {
             try {
                 // Llamada para obtener productos del carrito desde la base de datos.
                 const productsFromDb = await fetchProductsFromCart();
-              
+
                 if (Array.isArray(productsFromDb)) {
                     productsFromDb.forEach(product => {
-                        dispatch(addToCart(product)); 
+                        dispatch(addToCart(product));
                         console.log("Productos en el carrito: ", product);
                     });
                 }
@@ -36,12 +36,12 @@ function Cart() {
         console.log(product)
 
         const modifiedProduct = {
-            ...product, 
-            rating_rate: product.rating.rate,  
-            rating_count: product.rating.count, 
+            ...product,
+            rating_rate: product.rating.rate,
+            rating_count: product.rating.count,
         };
         try {
-            await insertProduct(modifiedProduct); 
+            await insertProduct(modifiedProduct);
         } catch (error) {
             console.error("Error al comprar el producto:", error);
         }
@@ -69,18 +69,24 @@ function Cart() {
         <>
             <div className="container-fluid">
                 <h2 className='text-center my-4'>Carrito de Compras</h2>
-                <div className='border rounded w-50 m-auto d-flex justify-content-evenly align-items-center'>
+                <div className='border rounded w-50 m-auto d-flex flex-column justify-content-evenly align-items-center p-4'>
+                    <div className='d-flex justify-content-evenly align-items-center gap-5'>
                     <img src="../src/assets/imgs/cart.png" alt="" />
-                    <h3 className='text-light text-center'><i className="bi bi-cart3"></i> Total: {total.toFixed(2)} €</h3>
+                    <h3 className='text-light text-center'><i className="bi bi-cart3"></i> Total: <span className='text-danger'>{total.toFixed(2)} €</span></h3>
+                    </div>
+                    <div className='d-flex flex-column'>
+                        <h3 className='text-light'>Total de Productos en el carrito: 0</h3>
+                        <button className='btn btn-success w-50 m-auto'>Realizar compra</button>
+                    </div>
                 </div>
                 <button onClick={clearTotalCart} className='btn btn-secondary mb-3'>Vaciar Carrito</button>
                 {products.length === 0 ? (
                     <p>No hay productos en el carrito</p>
                 ) : (
                     <div className="row">
-                      
+
                         {products.map(product => (
-                            <div className="col-sm-6 col-md-3 col-lg-2 mb-4" key={product.title}> 
+                            <div className="col-sm-6 col-md-3 col-lg-2 mb-4" key={product.title}>
                                 <div className="card h-100 p-3 card-hover text-light">
                                     <p className='text-center'>
                                         <button onClick={() => increaseQuantityProduct(product)} className="btn btn-warning mt-auto w-25">+</button>

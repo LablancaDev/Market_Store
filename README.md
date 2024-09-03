@@ -2,6 +2,10 @@
 
 Este es un proyecto en desarrollo de una tienda online que permite a los usuarios navegar, seleccionar y comprar productos. Aunque todavía no está terminado, se puede probar y tiene varias funcionalidades activas y operativas.
 
+## Ver el Proyecto
+
+Puedes ver el proyecto desplegado en [este enlace](https://market-store-swart.vercel.app/).
+
 ## Estado del Proyecto
 
 🚧 **En Proceso de Desarrollo** 🚧  

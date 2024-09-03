@@ -4,7 +4,6 @@ import { Product } from '../interfaces/interfaceProduct'
 import { addToCart, removeFromCart, decreaseQuantity, increaseQuantity, clearCart } from '../redux/reducers/cartSlice';
 import { fetchProductsFromCart, insertProduct, removeProductCart } from '../controllers/cartController';
 import { useEffect } from 'react';
-import { CartProduct } from '../interfaces/interfaceProduct';
 
 function Cart() {
 

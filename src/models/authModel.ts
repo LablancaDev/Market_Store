@@ -1,5 +1,4 @@
 import client from '../data_base/db'; 
-import { Row } from '@libsql/client';
 
 interface User {
     id?: number; // Cambiado a number para que coincida con AUTOINCREMENT

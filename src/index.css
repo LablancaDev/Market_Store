@@ -1,0 +1,42 @@
+a{
+    text-decoration: none;
+}
+body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../src/assets/imgs/blouse-2597205_1920.jpg);
+    background-repeat: no-repeat;
+    padding-top: 5em;
+}
+/* login */
+.transparent-bg {
+    background-color: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(2px); 
+    border-radius: 8px; 
+}
+
+/* navBar */
+.navbar{
+    background: linear-gradient(rgb(117, 117, 117), rgb(198, 186, 211), rgb(239, 218, 255));
+    z-index: 1;
+}
+/* Home_Products */
+
+.card{
+    cursor: pointer;
+}
+.card-hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.card-hover:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 0, 0, 0.4); 
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+}
+
+.card-hover img {
+    transition: transform 0.3s ease; 
+}
+
+.card-hover:hover img {
+    transform: scale(1.1); 
+}
+

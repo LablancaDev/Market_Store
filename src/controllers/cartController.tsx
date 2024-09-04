@@ -37,18 +37,18 @@ export const insertProduct = async (product: Product) => {
         description: product.description,
         category: product.category,
         image: product.image,
-        rating_rate: product.rating.rate, 
-        rating_count: product.rating.count 
+        quantity: product.quantity || 1,  // Asegúrate de que quantity sea un número
+        rating_rate: product.rating.rate,
+        rating_count: product.rating.count
     };
 
     try {
-      
         const existingProduct = await findProductByTitle(product.title);
 
         if (existingProduct) {
             console.log("El producto ya existe");
         } else {
-            await insertProductCart(productToInsert); 
+            await insertProductCart(productToInsert);
             console.log('Producto insertado en el carrito exitosamente');
         }
     } catch (error: unknown) {
@@ -59,6 +59,7 @@ export const insertProduct = async (product: Product) => {
         }
     }
 };
+
 
 export const removeProductCart = async (productTitle: string): Promise<void> => {
     try {

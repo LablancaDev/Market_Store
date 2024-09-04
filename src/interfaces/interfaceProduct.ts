@@ -27,6 +27,14 @@ export interface Row {
     description: string;
     category: string;
     image: string;
-    rating_rate: number; 
-    rating_count: number; 
+    rating_rate: number;
+    rating_count: number;
 }
+
+export interface Purchase {
+    makePurchase: CartProduct[]
+    total: number,
+    purchase_date: string,
+    user_id: number
+}
+

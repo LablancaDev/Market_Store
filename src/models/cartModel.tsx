@@ -28,12 +28,13 @@ export const insertProductCart = async (product: {
     description: string;
     category: string;
     image: string;
+    quantity: number;
     rating_rate: number;
     rating_count: number;
 }) => {
     const query = `
-        INSERT INTO cart (title, price, description, category, image, rating_rate, rating_count)
-        VALUES (?, ?, ?, ?, ?, ?, ?);
+        INSERT INTO cart (title, price, description, category, image, quantity, rating_rate, rating_count)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `;
 
     try {
@@ -45,6 +46,7 @@ export const insertProductCart = async (product: {
                 product.description,
                 product.category,
                 product.image,
+                product.quantity,
                 product.rating_rate,
                 product.rating_count,
             ],

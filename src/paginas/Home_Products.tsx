@@ -5,6 +5,7 @@ import { setProducts, setLoading, setError } from '../redux/reducers/productSlic
 import { Product } from '../interfaces/interfaceProduct'; 
 import { fetchProducts } from '../api/productApi'; 
 import { addToCart } from '../redux/reducers/cartSlice';
+import { insertProduct } from '../controllers/cartController';
 
 const Home_Productos: React.FC = () => {
     const dispatch = useDispatch();
@@ -38,10 +39,22 @@ const Home_Productos: React.FC = () => {
     if (error) return <p>Error: {error}</p>;
 
     
-    const buyProduct = (product: Product) => {
-        dispatch(addToCart(product)); 
+    const buyProduct = async (product: Product) => {
         console.log(product)
-      }
+
+        const modifiedProduct = {
+            ...product,
+            rating_rate: product.rating.rate,
+            rating_count: product.rating.count,
+        };
+
+        try {
+            await insertProduct(modifiedProduct);  // Inserta el producto en la base de datos
+            dispatch(addToCart(product));  // Añade el producto al carrito en el estado global
+        } catch (error) {
+            console.error("Error al comprar el producto:", error);
+        }
+    }
 
     return (
         <>

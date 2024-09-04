@@ -45,7 +45,11 @@ body{
     -webkit-box-orient: vertical; 
     overflow: hidden;            
     text-overflow: ellipsis;     
-  }
-  
+}
+/* footer */
+.footer{
+    position: fixed;
+    bottom: 0;
+}
   
 

@@ -14,7 +14,6 @@ const Login = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);
     const error = useSelector((state: RootState) => state.auth.error);
 
-   
     const [localUser, setLocalUser] = useState<string>(user?.name || ''); 
     const [password, setPassword] = useState<string>(user?.password || ''); 
     const [email, setEmail] = useState<string>(user?.email || ''); 

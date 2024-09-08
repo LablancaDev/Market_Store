@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { getPurchases } from '../controllers/purchasesController'
+import { useNavigate } from 'react-router-dom'
 
 const MyPurchases = () => {
 
@@ -20,18 +21,20 @@ const MyPurchases = () => {
         total: number;
     }
     
- 
+    const navigate = useNavigate()
     const id_user = useSelector((state: RootState) => state.auth.user?.id)     
 
     const [my_purchases, setPurchases] = useState<Purchase[]>([])
 
     useEffect(() => {
         const fetchPurchasesFromUser = async () => {
-            if (typeof id_user === 'undefined'){
-                alert('id no encontrado, inicia sesión...')
-                return;  // Manejar el caso cuando id_user es undefined
-            } 
-                
+            // Manejar el caso cuando id_user es undefined
+            if (!id_user) {
+                // Redirigir al login si no hay usuario
+                alert('id no encontrado! Iniciar sesión para acceder a las compras...');
+                navigate('/login');
+                return;
+            }
 
             try {
                 const response = await getPurchases(id_user)

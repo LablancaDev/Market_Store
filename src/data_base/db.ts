@@ -1,8 +1,8 @@
 import { createClient } from '@libsql/client';
 
 const client = createClient({
-  url: 'libsql://e-commerce-lablancadev.turso.io',
-  authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ2OTI5MDUsInAiOnsicnciOnsibnMiOlsiMWYxNjhiNGMtODU2OC00ZWUyLWJmNTQtNjdkYzRmMGNmNjk5Il19fX0.bm27mgC2giYtdZent0wFMMu_0pi95Y26mbs5RUeenNX-K1Vnfmxfk_x8atCjIgf4bc1XUYu-pNl5QuDRBSMcCw', // Asegúrate de reemplazar con tu token
+  url: import.meta.env.VITE_DATABASE_URL, 
+  authToken: import.meta.env.VITE_AUTH_TOKEN, 
 });
 
 async function createUsersTable() {
@@ -26,8 +26,6 @@ createUsersTable()
     console.error('Error al crear la tabla de usuarios:', error);
   });
 
-export default client; //exportación ES6 modules.
-// module.exports: Utilizado en CommonJS, Es la forma tradicional de exportar en Node.js.
-
-
-
+//exportación ES6 modules.
+export default client;
+// module.exports: Utilizado en CommonJS, forma tradicional de exportar en Node.js.

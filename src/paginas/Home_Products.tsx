@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; 
-import { RootState } from '../redux/store'; 
-import { setProducts, setLoading, setError } from '../redux/reducers/productSlice'; 
-import { Product } from '../interfaces/interfaceProduct'; 
-import { fetchProducts } from '../api/productApi'; 
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setProducts, setLoading, setError } from '../redux/reducers/productSlice';
+import { Product } from '../interfaces/interfaceProduct';
+import { fetchProducts } from '../api/productApi';
 import { addToCart } from '../redux/reducers/cartSlice';
 import { insertProduct } from '../controllers/cartController';
 
@@ -12,33 +12,36 @@ const Home_Productos: React.FC = () => {
 
     const products = useSelector((state: RootState) => state.products.products);
     const loading = useSelector((state: RootState) => state.products.loading);
-    const error = useSelector((state: RootState) => state.products.error); 
+    const error = useSelector((state: RootState) => state.products.error);
+
+    // Mostrar mensaje al usuario al añadir producto
+    const [productNameCart, setProductNameCart] = useState<string | null>(null)
 
     useEffect(() => {
         const loadProducts = async () => {
-            dispatch(setLoading(true)); 
+            dispatch(setLoading(true));
 
             try {
-                const data = await fetchProducts(); 
-                dispatch(setProducts(data)); 
+                const data = await fetchProducts();
+                dispatch(setProducts(data));
             } catch (error) {
                 if (error instanceof Error) {
-                    dispatch(setError(error.message)); 
+                    dispatch(setError(error.message));
                 } else {
-                    dispatch(setError('Error desconocido')); 
+                    dispatch(setError('Error desconocido'));
                 }
             } finally {
-                dispatch(setLoading(false)); 
+                dispatch(setLoading(false));
             }
         };
 
-        loadProducts(); 
-    }, [dispatch]); 
+        loadProducts();
+    }, [dispatch]);
 
     if (loading) return <p>Cargando productos...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    
+
     const buyProduct = async (product: Product) => {
         console.log(product)
 
@@ -51,6 +54,13 @@ const Home_Productos: React.FC = () => {
         try {
             await insertProduct(modifiedProduct);  // Inserta el producto en la base de datos
             dispatch(addToCart(product));  // Añade el producto al carrito en el estado global
+
+            setProductNameCart(product.title)
+
+            setTimeout(() => {
+                setProductNameCart(null)
+            }, 2000);
+
         } catch (error) {
             console.error("Error al comprar el producto:", error);
         }
@@ -59,6 +69,7 @@ const Home_Productos: React.FC = () => {
     return (
         <>
             <div className="container my-4">
+                <h2 className='text-center my-4 text-light'>Tienda</h2>
                 <div className="row">
                     {products.map((product: Product) => (
                         <div className="col-sm-6 col-md-3 col-lg-2 mb-4" key={product.title}>
@@ -68,6 +79,7 @@ const Home_Productos: React.FC = () => {
                                     <h5 className="card-title truncate">{product.title}</h5>
                                     <p className="card-text fw-bold text-danger">{product.price} €</p>
                                     <button onClick={() => buyProduct(product)} className="btn btn-primary mt-auto">Añadir al Carrito</button>
+                                    {productNameCart === product.title && <p className='text-center text-success pt-2'>Guardado!</p>}
                                 </div>
                             </div>
                         </div>

@@ -109,14 +109,14 @@ function Cart() {
     return (
         <>
             <div className="container-fluid mb-5">
-                <h2 className='text-center my-4'>Carrito de Compras</h2>
-                <div className='border rounded w-50 m-auto d-flex flex-column justify-content-evenly align-items-center p-4'>
+                <h2 className='text-center my-4 text-light'>Carrito de Compras</h2>
+                <div className='border rounded w-50 m-auto d-flex flex-column justify-content-evenly align-items-center p-4 mb-3 card-hover'>
                     <div className='d-flex justify-content-evenly align-items-center gap-5'>
                         <img src="../src/assets/imgs/cart.png" alt="" />
                         <h3 className='text-light text-center'><i className="bi bi-cart3"></i> Total: <span className='text-danger'>{total.toFixed(2)} €</span></h3>
                     </div>
                     <div className='d-flex flex-column'>
-                        <h3 className='text-light'>Total de Productos en el carrito: {products.reduce((acc, product) => acc + product.quantity, 0)}</h3>
+                        <h3 className=''>Total de Productos en el carrito: {products.reduce((acc, product) => acc + product.quantity, 0)}</h3>
                         <button onClick={handlePurchase} className='btn btn-success w-50 m-auto'>Realizar compra</button>
                         {message && <h4 className='text-center text-success bg-light rounded p-1 mt-2'>Compra relizada con éxito!!!</h4>}
                     </div>

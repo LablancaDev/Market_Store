@@ -55,3 +55,67 @@ export const insertPurchase = async (purchase: {
         console.error("Error al insertar la compra:", error);
     }
 };
+
+
+
+
+
+
+
+// Obtiene las compras de un usuario por su ID
+export const getProductsPurchases = async (id_user: number) => {
+    const query = `
+        SELECT 
+            p.id AS purchase_id,
+            p.total,
+            p.purchase_date,
+            pi.title,
+            pi.price,
+            pi.description,
+            pi.category,
+            pi.image
+        FROM purchases p
+        JOIN purchased_items pi ON p.id = pi.purchase_id
+        WHERE p.user_id = ?;
+    `;
+
+    try {
+        const result = await client.execute({
+            sql: query,
+            args: [id_user],
+        });
+
+        if (result.rows && result.rows.length > 0) {
+            // Agrupar por `purchase_id` para estructurar los datos
+            const purchases: Record<number, any> = {};
+
+            for (const row of result.rows) {
+                const purchaseId = row.purchase_id as number;
+
+                if (!purchases[purchaseId]) {
+                    purchases[purchaseId] = {
+                        id: purchaseId,
+                        total: row.total,
+                        purchase_date: row.purchase_date,
+                        items: [],
+                    };
+                }
+
+                purchases[purchaseId].items.push({
+                    title: row.title,
+                    price: row.price,
+                    description: row.description,
+                    category: row.category,
+                    image: row.image,
+                });
+            }
+
+            return Object.values(purchases); // Retornar el array de compras
+        } else {
+            return []; // No hay compras
+        }
+    } catch (error: any) {
+        console.error("Error al obtener las compras:", error);
+        return [];
+    }
+};

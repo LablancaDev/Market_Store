@@ -26,7 +26,8 @@ createUsersTable()
     console.error('Error al crear la tabla de usuarios:', error);
   });
 
-export default client;
+export default client; //exportación ES6 modules.
+// module.exports: Utilizado en CommonJS, Es la forma tradicional de exportar en Node.js.
 
 
 
